@@ -13,6 +13,7 @@ class BinarySearchTree:
       self.key = key
       self.parent = None
       self.root = self
+      
 
    def insert(self, child):
       if child.key <= self.key and self.left == None:
@@ -26,11 +27,9 @@ class BinarySearchTree:
       else:
          if child.key <= self.key:
             self.left.insert(child)
-            child.parent = self.left
             return
          else:
             self.right.insert(child)
-            child.parent = self.right
             return
       
          
@@ -45,26 +44,36 @@ class BinarySearchTree:
          return None
 
    def delete(self, value):
-      if value == self.key:
-         if self.right is not None:
-            if self.left is not None:
-               self.right.left = self.left
-            self = self.right
-            return self
-         elif self.left is not None:
-            self = self.left
-            return self
-         else:
-            self = None
-            return self
-      elif self.left is not None and value == self.left.key:
-         self.left = None
-         return self
-      elif self.right is not None and value == self.right.key:
-         self.right = None
-         return self
+      if value == self.search(value).key and self.search(value).is_leaf is True:
+         self.search(value) == None
+      elif value == self.search(value).key and self.search(value).is_leaf is False:
+         self.search(value).minimum = self.search(value)
+         self.search(value).minimum = None
       else:
-         return self
+         return None
+
+
+   # def delete(self, value):
+   #    if value == self.key:
+   #       if self.right is not None:
+   #          if self.left is not None:
+   #             self.right.left = self.left
+   #          self = self.right
+   #          return self
+   #       elif self.left is not None:
+   #          self = self.left
+   #          return self
+   #       else:
+   #          self = None
+   #          return self
+   #    elif self.left is not None and value == self.left.key:
+   #       self.left = None
+   #       return self
+   #    elif self.right is not None and value == self.right.key:
+   #       self.right = None
+   #       return self
+   #    else:
+   #       return self
 
    def is_leaf(self):
       if self.left is None and self.right is None:
@@ -72,5 +81,25 @@ class BinarySearchTree:
       else:
          return False
 
+   def has_left_child(self):
+      if self.left is not None:
+         return True
+      else:
+         return False
+      
+   def has_right_child(self):
+      if self.right is not None:
+         return True
+      else:
+         return False
+
+   def minimum(self):
+      if self.left is None:
+         return self
+      elif self.left is not None:
+         return self.left.minimum()
+
+         
+      
    
 
