@@ -48,91 +48,80 @@ class BinarySearchTree:
          return None
 
    def delete(self, value):
-      delete_me = self.search(value)
+      node = self.search(value)
       #the bst is empty
-      if delete_me is None:
-         return self
-      #the node is the root
-      elif delete_me is self:
-         if self.has_right_child:
-            self = self.right.minimum()
-         else:
-            self = None
+      if node is None:
          return self
       #the node is a root with no children or a leaf node
-      elif delete_me.is_leaf() is True:
-         if delete_me.parent.left is delete_me:
-            delete_me.parent.left = None
-            delete_me = None
+      elif node.is_leaf() is True:
+         if node.is_root() is True:
+            self = None
+         elif node.parent.right is node:
+            node.parent.right = None
+            node = None
          else:
-            delete_me.parent.right = None
-            delete_me = None
+            node.parent.left = None
+            node = None
          return self
       #the node has one child
-      elif delete_me.is_leaf() is False:
-         if delete_me.has_left_child():
-            delete_me.parent.left = delete_me.left
-            delete_me = delete_me.left
+      elif node.has_one_child():
+         if node.is_root() is True:
+            if node.has_left_child(): 
+               node = node.left
+               return node
+            else:
+               node = node.right
+               return node
+         elif node.has_left_child():
+            node.parent.left = node.left
+            node = node.left
             return self
-         elif delete_me.has_right_child():
+         elif node.has_right_child():
             return self
          else:
-            delete_me = None
+            node = None
             return self
       #the node has two children
-      elif delete_me.has_two_children():
-         replace_value = delete_me.right.minimum()
-         # reset pointers to new node
-         replace_value.left = delete_me.left
-         replace_value.right = delete_me.right
-         delete_me = replace_value
-         self.delete(replace_value.key)
+      elif node.has_two_children() and node.is_root():
+         min = node.right.minimum()
+         min.left = node.left
+         if node.right is not min:
+            min.right = node.right
+         self = min
+         if min.parent.left == min:
+            min.parent.left = None
+         return self
+      elif node.has_two_children():
+         min = node.right.minimum()
+         min.left = node.left
+         if node.right is not None and node.right is not min:
+            min.right = node.right
+         if node.parent.left == node:
+            node.parent.left = min
+         else:
+            node.parent.right = min
+         node = min
+         if min.parent.left == min:
+            min.parent.left = None
+         elif min.parent.right == None:
+            min.parent.right = None
+         
          return self
       #the BST is empty
       else:
          return None
 
-
-      # node = self.search(value)
-      # # node not found
-      # if node is None:
-      #    return self
-      # # root node is being deleted
-      # elif self.is_leaf() is True:
-      #    node = None
-      #    # if node.is_leaf() is True:
-      #    #    node = None
-      #    # elif node.has_two_children() is True or node.has_right_child() is True:
-      #    #    new_node = node.right.minimum()
-      #    #    node = new_node
-      #    #    if node.has_left_child():
-      #    #       left_child = node.left
-      #    #       node.left = left_child
-      #    # elif node.has_left_child() is True:
-      #    #    node = node.left
-      #    return node
-      # # node is a leaf
-      # elif node.is_leaf() is True:
-      #    if node.parent.left is node:
-      #       node.parent.left = None
-      #    elif node.parent.right is node:
-      #       node.parent.right = None
-      #    return self
-      # # node is not a leaf
-      # elif node.is_leaf() is False:
-      #    if node.has_two_children():
-      #       return self
-      #    elif node.has_left_child() is True:
-      #       node = node.left
-      #    elif node.has_right_child() is True:
-      #       node = node.right.minimum()
-      #    if self is node:
-      #       self = node
-      #    return self
-
    def keys(self, traverse_type):
+      keys = []
       if traverse_type == 'pre':
-         pass
+         keys.append(self.key)
+         if self.left is not None:
+            keys.extend(self.left.keys('pre'))
+            
+            # return keys
+         #elif self.right is not None:
+            keys.extend(self.right.keys('pre'))
+         return keys
       elif traverse_type == 'in':
          pass
       elif traverse_type == 'post':
@@ -181,6 +170,9 @@ class BinarySearchTree:
          return self
       else:
          return self.left.minimum()
+
+   def less_than_three_levels(self):
+      return self.left.is_leaf() and self.right.is_leaf() 
 
    
 
