@@ -1,5 +1,5 @@
 # DO NOT MODIFY THIS FILE
-# Run me via: python3 -m unittest test_bst
+# Run me via: ç
 
 import unittest
 import time
@@ -99,20 +99,20 @@ class TestBinarySearchTree(unittest.TestCase):
         bst = BinarySearchTree(5)
         self.assertEqual(bst, bst.search(5))
 
-    def test_delete_single_nonexistent(self):
-        """
-        Deleting a node with a key that does not exist returns the root node of
-        the single-level tree.
-        """
-        bst = BinarySearchTree(5)
-        self.assertEqual(bst, bst.delete(-999))
+    # def test_delete_single_nonexistent(self):
+    #     """
+    #     Deleting a node with a key that does not exist returns the root node of
+    #     the single-level tree.
+    #     """
+    #     bst = BinarySearchTree(5)
+    #     self.assertEqual(bst, bst.delete(-999))
 
-    def test_delete_single(self):
-        """
-        Deleting the node of a single-level tree returns None.
-        """
-        bst = BinarySearchTree(5)
-        self.assertIsNone(bst.delete(5))
+    # def test_delete_single(self):
+    #     """
+    #     Deleting the node of a single-level tree returns None.
+    #     """
+    #     bst = BinarySearchTree(5)
+    #     self.assertIsNone(bst.delete(5))
 
     # """
     # Toddler, two-level trees. (Depth of one.)
@@ -254,115 +254,115 @@ class TestBinarySearchTree(unittest.TestCase):
         bst.insert(bstRight)
         self.assertEqual(bstRight, bst.search(7))
 
-    def test_delete_two_nonexistent(self):
-        """
-        Deleting a node with a key that does not exist does not modify the tree
-        and returns the root node of the tree.
-        """
-        bst = BinarySearchTree(5)
-        bstLeft = BinarySearchTree(3)
-        bst.insert(bstLeft)
-        bstRight = BinarySearchTree(7)
-        bst.insert(bstRight)
-        self.assertEqual(bst, bst.delete(-999))
-        self.assertEqual(5, bst.key)
-        self.assertEqual(3, bst.left.key)
-        self.assertEqual(7, bst.right.key)
+    # def test_delete_two_nonexistent(self):
+    #     """
+    #     Deleting a node with a key that does not exist does not modify the tree
+    #     and returns the root node of the tree.
+    #     """
+    #     bst = BinarySearchTree(5)
+    #     bstLeft = BinarySearchTree(3)
+    #     bst.insert(bstLeft)
+    #     bstRight = BinarySearchTree(7)
+    #     bst.insert(bstRight)
+    #     self.assertEqual(bst, bst.delete(-999))
+    #     self.assertEqual(5, bst.key)
+    #     self.assertEqual(3, bst.left.key)
+    #     self.assertEqual(7, bst.right.key)
 
-    def test_delete_two_left_leaf(self):
-        """
-        Deleting the left child of a two-level tree removes the left child and
-        returns the root node.
-          5            5
-         / \     =>     \
-        3   7            7
-        Hint: Consult the BST rules. Time to improve your `delete` method... a little.
-        """
-        bst = BinarySearchTree(5)
-        bstLeft = BinarySearchTree(3)
-        bst.insert(bstLeft)
-        bstRight = BinarySearchTree(7)
-        bst.insert(bstRight)
-        self.assertEqual(bst, bst.delete(3))
-        self.assertIsNone(bst.left)
-        self.assertEqual(5, bst.key)
-        self.assertEqual(7, bst.right.key)
+    # def test_delete_two_left_leaf(self):
+    #     """
+    #     Deleting the left child of a two-level tree removes the left child and
+    #     returns the root node.
+    #       5            5
+    #      / \     =>     \
+    #     3   7            7
+    #     Hint: Consult the BST rules. Time to improve your `delete` method... a little.
+    #     """
+    #     bst = BinarySearchTree(5)
+    #     bstLeft = BinarySearchTree(3)
+    #     bst.insert(bstLeft)
+    #     bstRight = BinarySearchTree(7)
+    #     bst.insert(bstRight)
+    #     self.assertEqual(bst, bst.delete(3))
+    #     self.assertIsNone(bst.left)
+    #     self.assertEqual(5, bst.key)
+    #     self.assertEqual(7, bst.right.key)
 
-    def test_delete_two_right_leaf(self):
-        """
-        Deleting the right child of a two-level tree removes the right child and
-        returns the root node.
-          5            5
-         / \     =>   /
-        3   7        3
-        Hint: Small changes to `delete`, lest you overthink it.
-        """
-        bst = BinarySearchTree(5)
-        bstLeft = BinarySearchTree(3)
-        bst.insert(bstLeft)
-        bstRight = BinarySearchTree(7)
-        bst.insert(bstRight)
-        self.assertEqual(bst, bst.delete(7))
-        self.assertIsNone(bst.right)
-        self.assertEqual(5, bst.key)
-        self.assertEqual(3, bst.left.key)
+    # def test_delete_two_right_leaf(self):
+    #     """
+    #     Deleting the right child of a two-level tree removes the right child and
+    #     returns the root node.
+    #       5            5
+    #      / \     =>   /
+    #     3   7        3
+    #     Hint: Small changes to `delete`, lest you overthink it.
+    #     """
+    #     bst = BinarySearchTree(5)
+    #     bstLeft = BinarySearchTree(3)
+    #     bst.insert(bstLeft)
+    #     bstRight = BinarySearchTree(7)
+    #     bst.insert(bstRight)
+    #     self.assertEqual(bst, bst.delete(7))
+    #     self.assertIsNone(bst.right)
+    #     self.assertEqual(5, bst.key)
+    #     self.assertEqual(3, bst.left.key)
 
-    def test_delete_two_root_with_left(self):
-        """
-        Deleting the root of a two-level tree that has only a left child makes
-        the left child the new root, and `delete` returns it.
-          5
-         /     =>  3
-        3
-        Hint: Small steps of a little nested logic.
-        """
-        bst = BinarySearchTree(5)
-        bstLeft = BinarySearchTree(3)
-        bst.insert(bstLeft)
-        bst = bst.delete(5)
-        self.assertEqual(bstLeft, bst)
-        self.assertEqual(3, bst.key)
-        self.assertTrue(bst.is_leaf())
+    # def test_delete_two_root_with_left(self):
+    #     """
+    #     Deleting the root of a two-level tree that has only a left child makes
+    #     the left child the new root, and `delete` returns it.
+    #       5
+    #      /     =>  3
+    #     3
+    #     Hint: Small steps of a little nested logic.
+    #     """
+    #     bst = BinarySearchTree(5)
+    #     bstLeft = BinarySearchTree(3)
+    #     bst.insert(bstLeft)
+    #     bst = bst.delete(5)
+    #     self.assertEqual(bstLeft, bst)
+    #     self.assertEqual(3, bst.key)
+    #     self.assertTrue(bst.is_leaf())
 
-    def test_delete_two_root_with_right(self):
-        """
-        Deleting the root of a two-level tree that has only a right child makes
-        the right child the new root, and `delete` returns it.
-        5
-         \     =>  7
-          7
-        """
-        bst = BinarySearchTree(5)
-        initial_right_child = BinarySearchTree(7)
-        bst.right = initial_right_child
-        bst = bst.delete(5)
-        self.assertEqual(initial_right_child, bst)
-        self.assertEqual(7, bst.key)
-        self.assertTrue(bst.is_leaf())
+    # def test_delete_two_root_with_right(self):
+    #     """
+    #     Deleting the root of a two-level tree that has only a right child makes
+    #     the right child the new root, and `delete` returns it.
+    #     5
+    #      \     =>  7
+    #       7
+    #     """
+    #     bst = BinarySearchTree(5)
+    #     initial_right_child = BinarySearchTree(7)
+    #     bst.right = initial_right_child
+    #     bst = bst.delete(5)
+    #     self.assertEqual(initial_right_child, bst)
+    #     self.assertEqual(7, bst.key)
+    #     self.assertTrue(bst.is_leaf())
 
-    def test_delete_two_root(self):
-        """
-        Deleting the root of a two-level tree promotes the right child to be the
-        new root, and `delete` returns it.
-          5            7
-         / \     =>   /
-        3   7        3
-        Hint: Consult the bst deletion rules... but be direct for now.
-        """
-        bst = BinarySearchTree(5)
-        left = BinarySearchTree(3)
-        initial_right_child = BinarySearchTree(7)
-        bst.left = left
-        bst.right = initial_right_child
-        bst = bst.delete(5)
-        self.assertEqual(initial_right_child, bst)
-        self.assertEqual(3, bst.left.key)
-        self.assertIsNone(bst.right)
+    # def test_delete_two_root(self):
+    #     """
+    #     Deleting the root of a two-level tree promotes the right child to be the
+    #     new root, and `delete` returns it.
+    #       5            7
+    #      / \     =>   /
+    #     3   7        3
+    #     Hint: Consult the bst deletion rules... but be direct for now.
+    #     """
+    #     bst = BinarySearchTree(5)
+    #     left = BinarySearchTree(3)
+    #     initial_right_child = BinarySearchTree(7)
+    #     bst.left = left
+    #     bst.right = initial_right_child
+    #     bst = bst.delete(5)
+    #     self.assertEqual(initial_right_child, bst)
+    #     self.assertEqual(3, bst.left.key)
+    #     self.assertIsNone(bst.right)
 
-    # """
-    # Teen-age, three-level trees. (Depth of two.)
-    # Hint: Don't just curse - be recursive.
-    # """
+    # # """
+    # # Teen-age, three-level trees. (Depth of two.)
+    # # Hint: Don't just curse - be recursive.
+    # # """
 
     def test_insert_three_smaller_leftmost_leaf(self):
         """
@@ -663,47 +663,47 @@ class TestBinarySearchTree(unittest.TestCase):
     # using those new convenience methods. One change at a time, keeping the
     # tests passing.
 
-    def test_delete_three_nonexistent(self):
-        """
-        Deleting a node with a key that does not exist does not modify the tree
-        and returns the root node of a three-level tree.
-             10                   10
-           /    \               /    \
-          5      15      =>    5      15
-         / \    /  \          / \    /  \
-        2   7  12   17       2   7  12   17
-        """
-        bst = three_level_tree()
-        self.assertEqual(bst, bst.delete(-999))
-        self.assertEqual(10, bst.key)
-        self.assertEqual(5, bst.left.key)
-        self.assertEqual(15, bst.right.key)
-        self.assertEqual(2, bst.left.left.key)
-        self.assertEqual(7, bst.left.right.key)
-        self.assertEqual(12, bst.right.left.key)
-        self.assertEqual(17, bst.right.right.key)
+    # def test_delete_three_nonexistent(self):
+    #     """
+    #     Deleting a node with a key that does not exist does not modify the tree
+    #     and returns the root node of a three-level tree.
+    #          10                   10
+    #        /    \               /    \
+    #       5      15      =>    5      15
+    #      / \    /  \          / \    /  \
+    #     2   7  12   17       2   7  12   17
+    #     """
+    #     bst = three_level_tree()
+    #     self.assertEqual(bst, bst.delete(-999))
+    #     self.assertEqual(10, bst.key)
+    #     self.assertEqual(5, bst.left.key)
+    #     self.assertEqual(15, bst.right.key)
+    #     self.assertEqual(2, bst.left.left.key)
+    #     self.assertEqual(7, bst.left.right.key)
+    #     self.assertEqual(12, bst.right.left.key)
+    #     self.assertEqual(17, bst.right.right.key)
 
-    def test_delete_three_leftmost_leaf(self):
-        """
-        Deleting the leftmost leaf of a three-level tree removes the leftmost leaf
-        and returns the root node of the three-level tree.
-             10                   10
-           /    \               /    \
-          5      15      =>    5      15
-         / \    /  \            \    /  \
-        2   7  12   17           7  12   17
-        Hint: Consult the BST rules. Use paper. Draw pictures, hand-write code.
-              Be recursive.
-        """
-        bst = three_level_tree()
-        self.assertEqual(bst, bst.delete(2))
-        self.assertIsNone(bst.left.left)
-        self.assertEqual(10, bst.key)
-        self.assertEqual(5, bst.left.key)
-        self.assertEqual(15, bst.right.key)
-        self.assertEqual(7, bst.left.right.key)
-        self.assertEqual(12, bst.right.left.key)
-        self.assertEqual(17, bst.right.right.key)
+    # def test_delete_three_leftmost_leaf(self):
+    #     """
+    #     Deleting the leftmost leaf of a three-level tree removes the leftmost leaf
+    #     and returns the root node of the three-level tree.
+    #          10                   10
+    #        /    \               /    \
+    #       5      15      =>    5      15
+    #      / \    /  \            \    /  \
+    #     2   7  12   17           7  12   17
+    #     Hint: Consult the BST rules. Use paper. Draw pictures, hand-write code.
+    #           Be recursive.
+    #     """
+    #     bst = three_level_tree()
+    #     self.assertEqual(bst, bst.delete(2))
+    #     self.assertIsNone(bst.left.left)
+    #     self.assertEqual(10, bst.key)
+    #     self.assertEqual(5, bst.left.key)
+    #     self.assertEqual(15, bst.right.key)
+    #     self.assertEqual(7, bst.left.right.key)
+    #     self.assertEqual(12, bst.right.left.key)
+    #     self.assertEqual(17, bst.right.right.key)
 
     # def test_delete_three_inner_left_leaf(self):
     #     """
