@@ -63,8 +63,10 @@ class BinarySearchTree:
       elif delete_me.is_leaf() is True:
          if delete_me.parent.left is delete_me:
             delete_me.parent.left = None
+            delete_me = None
          else:
             delete_me.parent.right = None
+            delete_me = None
          return self
       #the node has one child
       elif delete_me.is_leaf() is False:
