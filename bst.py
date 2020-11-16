@@ -56,8 +56,8 @@ class BinarySearchTree:
       elif delete_me is self:
          if self.has_right_child:
             self = self.right.minimum()
-         elif self.has_left_child()
-         self = None
+         else:
+            self = None
          return self
       #the node is a root with no children or a leaf node
       elif delete_me.is_leaf() is True:
@@ -80,14 +80,14 @@ class BinarySearchTree:
             delete_me = None
             return self
       #the node has two children
-         elif delete_me.has_two_children():
-            replace_value = delete_me.right.minimum()
-            # reset pointers to new node
-            replace_value.left = delete_me.left
-            replace_value.right = delete_me.right
-            delete_me = replace_value
-            self.delete(replace_value.key)
-            return self
+      elif delete_me.has_two_children():
+         replace_value = delete_me.right.minimum()
+         # reset pointers to new node
+         replace_value.left = delete_me.left
+         replace_value.right = delete_me.right
+         delete_me = replace_value
+         self.delete(replace_value.key)
+         return self
       #the BST is empty
       else:
          return None
